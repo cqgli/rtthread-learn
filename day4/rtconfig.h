@@ -134,16 +134,26 @@
 
 /* Utilities */
 
+#define RT_USING_ULOG
+#define ULOG_OUTPUT_LVL_D
+#define ULOG_OUTPUT_LVL 7
+#define ULOG_ASSERT_ENABLE
+#define ULOG_LINE_BUF_SIZE 128
+
+/* log format */
+
+#define ULOG_USING_COLOR
+#define ULOG_OUTPUT_TIME
+#define ULOG_OUTPUT_LEVEL
+#define ULOG_OUTPUT_TAG
+/* end of log format */
+#define ULOG_BACKEND_USING_CONSOLE
 /* end of Utilities */
 
 /* Using USB legacy version */
 
 /* end of Using USB legacy version */
 /* end of RT-Thread Components */
-
-/* RT-Thread Utestcases */
-
-/* end of RT-Thread Utestcases */
 
 /* RT-Thread online packages */
 
@@ -246,6 +256,8 @@
 
 /* sensors drivers */
 
+#define PKG_USING_ICM20608
+#define PKG_USING_ICM20608_LATEST_VERSION
 /* end of sensors drivers */
 
 /* touch drivers */
@@ -329,6 +341,7 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_USB_TO_USART
+#define BSP_USING_ICM20608
 /* end of Onboard Peripheral Drivers */
 
 /* On-chip Peripheral Drivers */
@@ -336,6 +349,13 @@
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART1
+#define BSP_USING_I2C
+#define BSP_USING_I2C1
+#define BSP_I2C1_SCL_PIN 24
+#define BSP_I2C1_SDA_PIN 25
+#define BSP_USING_I2C2
+#define BSP_I2C2_SCL_PIN 81
+#define BSP_I2C2_SDA_PIN 80
 /* end of On-chip Peripheral Drivers */
 
 /* Board extended module Drivers */

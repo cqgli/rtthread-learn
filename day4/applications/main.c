@@ -45,18 +45,18 @@ static void thread2_entry (void *parameter)
 }
 int main(void)
 {
-    uint32_t m;
-    rt_pin_mode(GPIO_LED_R, PIN_MODE_OUTPUT);
-    rt_pin_mode(GPIO_LED_B, PIN_MODE_OUTPUT);
-    rt_thread_init(&thread1,"thread1",thread1_entry, RT_NULL,&thread1_stack[0],sizeof(thread1_stack),20,5);
-    m = rt_thread_create("thread2",thread2_entry,RT_NULL,1024,19,10);
-    if(m != RT_NULL)
-    {
-        rt_kprintf("thread2 create success \n");
-    }
+    // uint32_t m;
+    // rt_pin_mode(GPIO_LED_R, PIN_MODE_OUTPUT);
+    // rt_pin_mode(GPIO_LED_B, PIN_MODE_OUTPUT);
+    // rt_thread_init(&thread1,"thread1",thread1_entry, RT_NULL,&thread1_stack[0],sizeof(thread1_stack),20,5);
+    // m = rt_thread_create("thread2",thread2_entry,RT_NULL,1024,19,10);
+    // if(m != RT_NULL)
+    // {
+    //     rt_kprintf("thread2 create success \n");
+    // }
 
-    rt_thread_startup(&thread1);
-    rt_thread_startup(m);
+    // rt_thread_startup(&thread1);
+    // rt_thread_startup(m);
 }
 
 
