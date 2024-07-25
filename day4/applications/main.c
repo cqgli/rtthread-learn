@@ -25,7 +25,7 @@ static void thread1_entry (void *parameter)
     {
         rt_kprintf("thread1 running..\n");
         rt_pin_write(GPIO_LED_B,PIN_HIGH);
-         rt_thread_mdelay(500);
+         rt_thread_mdelay(2000);
         rt_pin_write(GPIO_LED_B,PIN_LOW);
     }
 }
