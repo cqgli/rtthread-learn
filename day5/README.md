@@ -101,3 +101,7 @@ FAL (Flash Abstraction Layer) Flash 抽象层，是 RT-Thread 的一个软件包
 #### 文件系统结合FAL使用W25Q64
 
 ![image-20240726202035775](C:\Users\27545\AppData\Roaming\Typora\typora-user-images\image-20240726202035775.png)
+
+### 课后作业
+
+![image-20240727175045884](C:\Users\27545\AppData\Roaming\Typora\typora-user-images\image-20240727175045884.png)
