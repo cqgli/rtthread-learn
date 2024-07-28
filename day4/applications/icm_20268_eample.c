@@ -2,7 +2,6 @@
 #include <rtdevice.h>
 #include <board.h>
 #include <icm20608.h>
-
 #define LOG_TAG     "icm.app"
 #define LOG_LVL     LOG_LVL_DBG
 #include <ulog.h>

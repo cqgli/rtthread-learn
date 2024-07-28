@@ -28,7 +28,7 @@ int main(void)
     lcd_clear(WHITE);
 
     /* set the background color and foreground color */
-    lcd_set_color(WHITE, BLACK);
+    lcd_set_color(BLACK, BLACK);
 
     /* show some string on lcd */
     lcd_show_string(10, 69, 16, "Hello, RT-Thread!");
