@@ -141,10 +141,6 @@
 /* end of Using USB legacy version */
 /* end of RT-Thread Components */
 
-/* RT-Thread Utestcases */
-
-/* end of RT-Thread Utestcases */
-
 /* RT-Thread online packages */
 
 /* IoT - internet of things */
@@ -329,6 +325,9 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_USB_TO_USART
+#define BSP_USING_SRAM
+#define BSP_USING_ONBOARD_LCD
+#define BSP_USING_ONBOARD_LCD_PWM_BL
 /* end of Onboard Peripheral Drivers */
 
 /* On-chip Peripheral Drivers */
@@ -336,6 +335,11 @@
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART1
+#define BSP_USING_PWM
+#define BSP_USING_PWM14
+#define BSP_USING_PWM14_CH1
+#define BSP_USING_EXT_FMC_IO
+#define BSP_USING_FMC
 /* end of On-chip Peripheral Drivers */
 
 /* Board extended module Drivers */

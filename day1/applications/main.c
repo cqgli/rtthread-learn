@@ -14,12 +14,16 @@
 #include <drv_gpio.h>
 #ifndef RT_USING_NANO
 #include <rtdevice.h>
+#include <drv_lcd.h>
 #endif /* RT_USING_NANO */
 
 #define GPIO_LED_B    GET_PIN(F, 11)
 #define GPIO_LED_R    GET_PIN(F, 12)
 int main(void)
 {
+    lcd_clear(WHITE);
+    lcd_set_color(WHITE,BLACK);
+    lcd_show_string(10,30,16,"hello,rtthread!");
     rt_pin_mode(GPIO_LED_R, PIN_MODE_OUTPUT);
     rt_pin_mode(GPIO_LED_B, PIN_MODE_OUTPUT);
     while (1)
