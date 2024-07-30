@@ -18,7 +18,7 @@
 
 extern float temp;
 extern float humidity;
-int LightSwitch = 0;
+int LightSwitch = 1;
 
  cJSON * cjson = RT_NULL;
  cJSON * params_ali = RT_NULL;
@@ -90,10 +90,16 @@ static void example_message_arrive(void *pcontext, void *pclient, iotx_mqtt_even
                     rt_kprintf("LightSwitch: %d -> ",LightSwitch);
                     LightSwitch = cJSON_GetObjectItem(params_ali, "LightSwitch")->valueint;
                     rt_kprintf("%d\n",LightSwitch);
-                    if(LightSwitch)
+                    if(LightSwitch){
                         rt_pin_write(GPIO_LED_R,PIN_LOW);
+                        LightSwitch = 1;
+                    }
                     else
-                        rt_pin_write(GPIO_LED_R,PIN_HIGH);
+                    {
+                         rt_pin_write(GPIO_LED_R,PIN_HIGH);
+                         LightSwitch = 0;
+                    }
+                       
                 }
 
             cJSON_Delete(cjson);
@@ -152,7 +158,7 @@ static int example_publish(void *handle)
     int             topic_len = 0;
     char           payload[300] = {0};
 
-    rt_snprintf(payload,sizeof(payload),"{\"params\":{\"temperature\":%.2f,\"Humidity\":%.2f}}",temp,humidity);
+    rt_snprintf(payload,sizeof(payload),"{\"params\":{\"temperature\":%.2f,\"Humidity\":%.2f,\"LightSwitch\":%d}}",temp,humidity,LightSwitch);
     topic_len = strlen(fmt) + strlen(DEMO_PRODUCT_KEY) + strlen(DEMO_DEVICE_NAME) + 1;
     topic = HAL_Malloc(topic_len);
     if (topic == NULL) {
@@ -174,42 +180,7 @@ static int example_publish(void *handle)
 
 static void example_event_handle(void *pcontext, void *pclient, iotx_mqtt_event_msg_pt msg)
 {
-    //iotx_mqtt_topic_info_t     *topic_info1 = (iotx_mqtt_topic_info_pt) msg->msg;
     EXAMPLE_TRACE("msg->event_type : %d", msg->event_type);
-    //cjson = cJSON_Parse(topic_info1->payload);//将JSON字符串转换成JSON结构体
-    // rt_kprintf("1\n");
-    //  if(cjson == RT_NULL)                       //判断转换是否成功
-    // {
-    // }
-    // else
-    // {
-    //     params_ali = cJSON_GetObjectItem(cjson,"params");   //解析对象
-
-    //     //判断是否有相对应的内容，有才会进行数据提取
-    //     if(cJSON_GetObjectItem(params_ali, "temperature") != RT_NULL){
-    //         rt_kprintf("temp: %d -> ",temp);
-    //         temp = cJSON_GetObjectItem(params_ali, "temp")->valueint;
-    //         rt_kprintf("%.2f\n",temp);
-    //     }
-
-    //     if(cJSON_GetObjectItem(params_ali, "humidity") != RT_NULL){
-    //         rt_kprintf("humi: %.f -> ",humidity);
-    //         humidity = cJSON_GetObjectItem(params_ali, "humi")->valueint;
-    //         rt_kprintf("%.3f\n",humidity);
-    //     }
-    //     rt_kprintf("2\n");
-    //     if(cJSON_GetObjectItem(params_ali, "LightSwitch") != RT_NULL){
-    //         rt_kprintf("LightSwitch: %d -> ",LightSwitch);
-    //         LightSwitch = cJSON_GetObjectItem(params_ali, "LightSwitch")->valueint;
-    //         rt_kprintf("%d\n",LightSwitch);
-    //         if(LightSwitch)
-    //             rt_pin_write(GPIO_LED_R,PIN_LOW);
-    //         else
-    //             rt_pin_write(GPIO_LED_R,PIN_HIGH);
-    //     }
-
-    //    cJSON_Delete(cjson);
-    // }
  }
 
 
