@@ -95,11 +95,10 @@ static void example_message_arrive(void *pcontext, void *pclient, iotx_mqtt_even
                         LightSwitch = 1;
                     }
                     else
-                    {
+                       {
                          rt_pin_write(GPIO_LED_R,PIN_HIGH);
                          LightSwitch = 0;
-                    }
-                       
+                       }
                 }
 
             cJSON_Delete(cjson);
@@ -147,7 +146,6 @@ static int topic_subscribe(void * handle,const char *ali_topic)
 static int example_subscribe(void *handle)
 {
         topic_subscribe(handle, ali_topic_get);
-    //topic_subscribe(handle, ali_topic_set);
 }
 
 static int example_publish(void *handle)
