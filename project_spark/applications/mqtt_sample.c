@@ -18,6 +18,8 @@
 
 extern float temp;
 extern float humidity;
+extern uint32_t ps_data;
+extern float brightness;
 int LightSwitch = 1;
 
  cJSON * cjson = RT_NULL;
@@ -84,6 +86,16 @@ static void example_message_arrive(void *pcontext, void *pclient, iotx_mqtt_even
                     rt_kprintf("humi: %.f -> ",humidity);
                     humidity = cJSON_GetObjectItem(params_ali, "humi")->valueint;
                     rt_kprintf("%.3f\n",humidity);
+                }
+                 if(cJSON_GetObjectItem(params_ali, "mlux") != RT_NULL){
+                    rt_kprintf("mlux: %.f -> ",brightness);
+                    brightness = cJSON_GetObjectItem(params_ali, "mlux")->valueint;
+                    rt_kprintf("%.3f\n",brightness);
+                }
+                if(cJSON_GetObjectItem(params_ali, "ap3216") != RT_NULL){
+                    rt_kprintf("ps_data: %.f -> ",ps_data);
+                    ps_data = cJSON_GetObjectItem(params_ali, "ap3216")->valueint;
+                    rt_kprintf("%.3f\n",ps_data);
                 }
                 rt_kprintf("2\n");
                 if(cJSON_GetObjectItem(params_ali, "LightSwitch") != RT_NULL){
@@ -156,7 +168,7 @@ static int example_publish(void *handle)
     int             topic_len = 0;
     char           payload[300] = {0};
 
-    rt_snprintf(payload,sizeof(payload),"{\"params\":{\"temperature\":%.2f,\"Humidity\":%.2f,\"LightSwitch\":%d}}",temp,humidity,LightSwitch);
+    rt_snprintf(payload,sizeof(payload),"{\"params\":{\"temperature\":%.2f,\"Humidity\":%.2f,\"LightSwitch\":%d,\"mlux\":%.2f,\"ap3216\":%d}}",temp,humidity,LightSwitch,brightness,ps_data);
     topic_len = strlen(fmt) + strlen(DEMO_PRODUCT_KEY) + strlen(DEMO_DEVICE_NAME) + 1;
     topic = HAL_Malloc(topic_len);
     if (topic == NULL) {
@@ -218,8 +230,11 @@ static int mqtt_example_main(int argc, char *argv[])
     rt_thread_startup(msg_receive);
 
     while (1) {
-            example_publish(pclient);
-            rt_thread_mdelay(2000);
+        example_publish(pclient);
+        rt_thread_mdelay(2000);
+            lcd_show_string(16,29,16,"temp:%.2f",temp);
+        lcd_show_string(16,69,16,"humidity:%.2f",humidity);
+        lcd_show_string(16,109,16,"lightswitch: %d",LightSwitch);
     }
 
     return 0;
@@ -235,5 +250,6 @@ void  ali_mqtt(void)
     }
     else 
     rt_kprintf("mqtt create failed\n");
+
 }
 MSH_CMD_EXPORT(ali_mqtt,ali_mqtt);
