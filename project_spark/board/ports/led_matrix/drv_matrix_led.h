@@ -18,4 +18,8 @@ extern const RGBColor_TypeDef WHITE;
 extern void Set_LEDColor(uint16_t LedId, RGBColor_TypeDef Color);
 extern void RGB_Reflash(void);
 extern void led_matrix_rst();
+void led_matrix_fill_test(uint8_t index);
+void led_matrix_test1();
+void led_matrix_test2();
+void led_matrix_test3();
 #endif

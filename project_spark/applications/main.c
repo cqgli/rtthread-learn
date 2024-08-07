@@ -16,17 +16,25 @@
 #include <rtdevice.h>
 #include <spi_wifi_rw007.h>
 #endif /* RT_USING_NANO */
-
+extern int rt_irq_init(void);
+extern void  ali_mqtt(void);
+extern int rt_ap3216(void);
+extern int rt_aht10_port(void);
 #define GPIO_LED_B    GET_PIN(F, 11)
 #define GPIO_LED_R    GET_PIN(F, 12)
 int main(void)
 {
+    rt_irq_init();
     char *name = "MrLi";
     char *password = "12345678";
     rt_wlan_scan();
     rt_wlan_connect(name,password);
+    rt_ap3216();
+    rt_aht10_port();
    rt_pin_mode(GPIO_LED_R, PIN_MODE_OUTPUT);
     rt_pin_mode(GPIO_LED_B, PIN_MODE_OUTPUT);
+    rt_thread_mdelay(3000);
+    ali_mqtt();
     while (1)
     {
         //rt_pin_write(GPIO_LED_R,PIN_HIGH);

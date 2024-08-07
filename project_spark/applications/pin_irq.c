@@ -1,7 +1,7 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <drv_gpio.h>
-
+#include <drv_matrix_led.h>
 //定义按键
 #define KEY_UP GET_PIN(C,5)
 #define KEY_DOWN GET_PIN(C,1)
@@ -13,24 +13,28 @@
 void key_up_callback( void * args)
 {
     uint32_t value  = rt_pin_read(KEY_UP);
+    led_matrix_fill_test(0);
     rt_kprintf("key up! %d ",value);
 }
 void key_down_callback( void * args)
 {
     uint32_t value  = rt_pin_read(KEY_DOWN);
+    led_matrix_fill_test(1);
     rt_kprintf("key down! %d ",value);
 }
 void key_left_callback( void * args)
 {
     uint32_t value  = rt_pin_read(KEY_LEFT);
+    led_matrix_fill_test(2);
     rt_kprintf("key left! %d ",value);
 }
 void key_right_callback( void * args)
 {
     uint32_t value  = rt_pin_read(KEY_RIGHT);
+    led_matrix_fill_test(3);
     rt_kprintf("key right! %d ",value);
 }
-static int rt_irq_init(void)
+int rt_irq_init(void)
 {
     //初始化引脚模式
     rt_pin_mode(KEY_UP, PIN_MODE_INPUT_PULLUP);

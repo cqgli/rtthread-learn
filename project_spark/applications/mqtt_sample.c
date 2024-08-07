@@ -230,9 +230,11 @@ static int mqtt_example_main(int argc, char *argv[])
     rt_thread_startup(msg_receive);
 
     while (1) {
+        lcd_clear();
+        lcd_set_color(WHITE, BLACK);
         example_publish(pclient);
         rt_thread_mdelay(2000);
-            lcd_show_string(16,29,16,"temp:%.2f",temp);
+        lcd_show_string(16,29,16,"temp:%.2f",temp);
         lcd_show_string(16,69,16,"humidity:%.2f",humidity);
         lcd_show_string(16,109,16,"lightswitch: %d",LightSwitch);
     }
