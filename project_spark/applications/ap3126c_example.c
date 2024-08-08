@@ -2,7 +2,7 @@
 #include <rtdevice.h>
 #include <ap3216c.h>
 
-uint32_t ps_data;
+rt_uint16_t ps_data;
 float brightness;
 
 
@@ -22,7 +22,8 @@ void ap3216_entry(void *param)
     {
         ps_data = ap3216c_read_ps_data(dev);
         brightness = ap3216c_read_ambient_light(dev);
-        rt_thread_mdelay(1000);
+
+        rt_thread_mdelay(500);
     }
    
 }

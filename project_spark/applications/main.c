@@ -24,7 +24,7 @@ extern int rt_aht10_port(void);
 #define GPIO_LED_R    GET_PIN(F, 12)
 int main(void)
 {
-    rt_irq_init();
+  rt_irq_init();
     char *name = "MrLi";
     char *password = "12345678";
     rt_wlan_scan();
