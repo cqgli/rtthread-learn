@@ -2,6 +2,9 @@
 #include <rtdevice.h>
 #include <aht10.h>
 #include <drv_lcd.h>
+#include <drv_matrix_led.h>
+#include <beep.h>
+#include <drv_gpio.h>
 float temp;
 float humidity;
 extern rt_uint16_t ps_data;
@@ -24,9 +27,23 @@ static void aht10_entry(void *params)
         rt_thread_mdelay(500);
          lcd_show_string(16,29,16,"temp:%.2f",temp);
         lcd_show_string(16,49,16,"humidity:%.2f",humidity);
-        lcd_show_string(16,69,16,"ps_data:%d",ps_data);
+        lcd_show_string(16,69,16,"ps_data:%2d",ps_data);
         lcd_show_string(16,89,16,"brightness:%.2f",brightness);
-        //rt_kprintf("%d %d \n",humidity,temp);
+        if(ps_data > 20)
+        {
+            led_matrix_test1();
+        }
+        if(brightness > 300)
+        {
+            led_matrix_rst();
+        }
+        if(temp > 36)
+        {
+            beep_init(GET_PIN(B,0), PIN_HIGH);
+            rt_thread_mdelay(1000);
+            beep_init(GET_PIN(B,0),PIN_LOW);
+        }
+        //rt_kprintf("%d %d \n",humidity,temp)  ;
     }
 }
 int rt_aht10_port(void)

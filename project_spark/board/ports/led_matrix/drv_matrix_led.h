@@ -9,11 +9,11 @@ typedef struct RGBColor_TypeDef
     uint8_t B;
 } RGBColor_TypeDef; // 颜色结构体
 
-extern const RGBColor_TypeDef DARK;
-extern const RGBColor_TypeDef GREEN;
-extern const RGBColor_TypeDef RED;
-extern const RGBColor_TypeDef BLUE;
-extern const RGBColor_TypeDef WHITE;
+// extern const RGBColor_TypeDef DARK;
+// extern const RGBColor_TypeDef GREEN;
+// extern const RGBColor_TypeDef RED;
+// extern const RGBColor_TypeDef BLUE;
+// extern const RGBColor_TypeDef WHITE;
 
 extern void Set_LEDColor(uint16_t LedId, RGBColor_TypeDef Color);
 extern void RGB_Reflash(void);

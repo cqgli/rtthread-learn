@@ -1,7 +1,7 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <ap3216c.h>
-
+#include <drv_matrix_led.h>
 rt_uint16_t ps_data;
 float brightness;
 
